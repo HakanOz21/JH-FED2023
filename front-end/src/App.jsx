@@ -20,7 +20,7 @@ function App() {
       <div className="card">
         <button onClick={async () => {const allBooks = await getAllBooks()
         setCount(allBooks)}}>
-          <pre>{JSON.stringify(count,null,4)}</pre>
+          {JSON.stringify(count,null,4)}
         </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
