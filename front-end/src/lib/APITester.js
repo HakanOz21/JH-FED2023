@@ -1,4 +1,4 @@
-import { getAllBooks, getOneBook, deleteBook, createBook, updateBook } from './api.js';
+import { getAllBooks, getOneBook, deleteBook, createBook, updateBook } from './api.ts';
 
 //getAllBooks()
 //getOneBook("9781783980048");
