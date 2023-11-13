@@ -1,8 +1,8 @@
 /* Hello world! */
-function hello(who: string = "world"): string {
+/* function hello(who: string = "world"): string {
     return `Hello ${who}! `;
   } 
-console.log (hello ("Typescript"));
+console.log (hello ("Typescript")); */
   
 // types are enforced;
 // console.log (hello (3));
