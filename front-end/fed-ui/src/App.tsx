@@ -1,11 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from 'react-router-dom'
+import BookList from "./components/BookList";
+import BookDetails from './components/BookDetails';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
+  
   return (
-    <div className="App">
-      <h1>BookMonkey</h1>
+    <div className='App'>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<BookList />} />
+        <Route path="/book/:id" element={<BookDetails />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }
