@@ -8,12 +8,10 @@ import Container from '@mui/material/Container';
 function NameAndLogo() {
   return (
     <AppBar position="static" sx={{ backgroundColor: '#1976D2' }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          {/* Du kannst dein Logo hier einfügen */}
+      <Container maxWidth={false}>
+        <Toolbar disableGutters >
           <AutoStoriesIcon sx={{ mr: 1 }} />
 
-          {/* Titel der App */}
           <Typography
             variant="h5"
             noWrap
