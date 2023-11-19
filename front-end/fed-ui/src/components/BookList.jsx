@@ -26,7 +26,12 @@ const BookList = () => {
             {books.map((book)=> (
                 <div key={book.id} className="book">
                     <div><h3>{book.title}</h3></div>
+                    <div>{book.author}</div>
                     <div><img src={book.cover} alt="Kein Bild Vorhanden"/></div>
+                    <div className="publisher-price-container">
+                        <div>{book.publisher}</div>
+                        <div>{book.price}</div>
+                    </div>
                     <div><LikeButton/></div>
                 </div>
             ))}

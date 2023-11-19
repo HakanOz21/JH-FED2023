@@ -69,3 +69,11 @@ button {
   width: 200px;
   border-radius: 5px;
 }
+
+.publisher-price-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
