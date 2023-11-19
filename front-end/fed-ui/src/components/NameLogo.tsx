@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import AdbIcon from '@mui/icons-material/Adb';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import Container from '@mui/material/Container';
 
 function NameAndLogo() {
@@ -11,7 +11,7 @@ function NameAndLogo() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Du kannst dein Logo hier einfügen */}
-          <AdbIcon sx={{ mr: 1 }} />
+          <AutoStoriesIcon sx={{ mr: 1 }} />
 
           {/* Titel der App */}
           <Typography
