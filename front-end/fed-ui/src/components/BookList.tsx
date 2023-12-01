@@ -2,11 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import '../App.css';
 import './LikeButton';
-import { getAllBooks } from "../API";
+import { getAllBooks } from "../models/API";
 import LikeButton from "./LikeButton";
+import { Books } from "../models/BooksInterface";
 
 const BookList = () => {
-    const [books, setBooks] = useState([]);
+    const [books, setBooks] = useState<Books[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
