@@ -1,6 +1,6 @@
 import { Books } from "./BooksInterface";
 
-export const API_URL: string = "http://localhost:4730/books?_limit=12";
+export const API_URL: string = "http://localhost:4730/books";
 
  async function getAllBooks(): Promise<Books[]> {
   try {
