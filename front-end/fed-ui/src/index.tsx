@@ -11,7 +11,7 @@ link.href =
 link.rel = "stylesheet";
 document.head.appendChild(link);
 
-document.body.style.fontFamily = "Nunito";
+document.body.style.fontFamily = "Roboto";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
