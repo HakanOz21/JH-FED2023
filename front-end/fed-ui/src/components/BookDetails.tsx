@@ -3,10 +3,12 @@ import "../App.css";
 import { Books } from "../models/BooksInterface";
 import { getOneBook } from "../models/API";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const BookDetails = () => {
   const [book, setBook] = useState<Books | null>(null);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,6 +45,7 @@ const BookDetails = () => {
         <p>{book?.abstract}</p>
         <h2>{book?.author}</h2>
       </div>
+      <button onClick={() => navigate(`/books/${book?.id}/edit`)}>Edit</button>
     </div>
   );
 };

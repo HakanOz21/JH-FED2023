@@ -32,6 +32,27 @@ async function getOneBook(id: string) {
   }
 }
 
+async function updateBook(id: string, updatedData: Partial<Books>) {
+  try {
+    const response = await fetch(`${BOOK_DETAILS_API_URL}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    if (!response.ok) {
+      const returnText = await response.text();
+      throw new Error(returnText);
+    }
+    const updatedBook = await response.json();
+    return updatedBook;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 /*
 async function deleteBook(isbn: string): Promise<void> {
   try {
@@ -72,31 +93,7 @@ async function createBook(isbn: string, title: string, id: string): Promise<void
   } catch (error) {
     console.error('Error:', error);
   }
-}
 
-async function updateBook(isbn: string, title: string, id: string): Promise<void> {
-  try {
-    const requestData = {
-      isbn,
-      title,
-      id,
-    };
-    const response = await fetch(`${API_URL}/${isbn}`, {
-      method: "PUT",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestData),
-    });
-    if (!response.ok) {
-      const returnText = await response.text();
-      throw new Error(returnText);
-    }
-    const updatedBook = await response.json();
-    console.log('Updated Book:', updatedBook);
-  } catch (error) {
-    console.error('Error:', error);
-  }
 }*/
 
-export { getAllBooks, getOneBook };
+export { getAllBooks, getOneBook, updateBook };
