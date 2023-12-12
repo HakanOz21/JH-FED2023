@@ -7,11 +7,19 @@ import "./LikeButton";
 import { getAllBooks } from "../models/API";
 import LikeButton from "./LikeButton";
 import { Books } from "../models/BooksInterface";
+import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import { CardMedia } from "@mui/material";
 
 const BookList = () => {
   const [books, setBooks] = useState<Books[]>([]);
-  const maxLength = 30;
+  const maxLength = 20;
   const colorBlue = indigo[700];
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,36 +37,50 @@ const BookList = () => {
     <div className="book-list">
       {books.map((book) => (
         <div key={book.id} className="book">
-          <div>
-            <h3>
-              {book.title.length > maxLength
-                ? book.title.substring(0, maxLength - 3) + "..."
-                : book.title}
-            </h3>
-          </div>
-          <div>
-            <Typography>{book.author}</Typography>
-          </div>
-          {book.cover ? (
-            <div>
-              <img src={book.cover} alt="Bild vorhanden" />
-            </div>
-          ) : (
-            <div>
-              <p>Kein Bild vorhanden</p>
-            </div>
-          )}
-          <div className="publisher-price-container">
-            {/*             <div>
-              <Typography>{book.publisher}</Typography>
-            </div> */}
-            <div>
-              <Typography style={{ color: colorBlue }}>{book.price}</Typography>
-            </div>
-            <div>
-              <LikeButton />
-            </div>
-          </div>
+          <Card
+            sx={{
+              maxWidth: 300,
+              transform: "scale(0.9)",
+              display: "inline-block",
+              mx: "2px",
+              borderRadius: 5,
+            }}
+          >
+            <CardContent>
+              <div>
+                <h2>
+                  {book.title.length > maxLength
+                    ? book.title.substring(0, maxLength - 3) + "..."
+                    : book.title}
+                </h2>
+              </div>
+              <div>
+                <Typography>{book.author}</Typography>
+              </div>
+              {book.cover ? (
+                <CardMedia
+                  component="img"
+                  alt="Bild vorhanden"
+                  image={book.cover}
+                  onClick={() => navigate(`/books/${book.id}`)}
+                />
+              ) : (
+                <div>
+                  <p>Kein Bild vorhanden</p>
+                </div>
+              )}
+              <div className="publisher-price-container">
+                <div>
+                  <Typography style={{ color: colorBlue }}>
+                    {book.price}
+                  </Typography>
+                </div>
+                <div>
+                  <LikeButton />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       ))}
     </div>

@@ -1,6 +1,7 @@
 import { Books } from "./BooksInterface";
 
 export const API_URL: string = "http://localhost:4730/books?_limit=11";
+export const BOOK_DETAILS_API_URL: string = "http://localhost:4730/books";
 
 async function getAllBooks(): Promise<Books[]> {
   try {
@@ -16,21 +17,22 @@ async function getAllBooks(): Promise<Books[]> {
     throw error;
   }
 }
-/*
-async function getOneBook(isbn: string): Promise<Books[]> {
+
+async function getOneBook(id: string) {
   try {
-    const response = await fetch(`${API_URL}/${isbn}`);
+    const response = await fetch(`${BOOK_DETAILS_API_URL}/${id}`);
     if (!response.ok) {
       const returnText = await response.text();
       throw new Error(returnText);
     }
     const oneBook = await response.json();
-    console.log(oneBook);
+    return oneBook;
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
 }
 
+/*
 async function deleteBook(isbn: string): Promise<void> {
   try {
     const response = await fetch(`${API_URL}/${isbn}`, {
@@ -97,4 +99,4 @@ async function updateBook(isbn: string, title: string, id: string): Promise<void
   }
 }*/
 
-export { getAllBooks };
+export { getAllBooks, getOneBook };
