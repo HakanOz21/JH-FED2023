@@ -2,22 +2,28 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { updateBook, getOneBook } from "../models/API";
 import { Books } from "../models/BooksInterface";
+import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+import { indigo } from "@mui/material/colors";
 
 const BookEditDetails = () => {
   const { id } = useParams();
   const [book, setBook] = useState<Books | null>(null);
   const [editedBook, setEditedBook] = useState<Partial<Books>>({});
-  const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
+  const isEditing =
+    new URLSearchParams(window.location.search).get("editing") === "true";
+  const colorBlue = indigo[700];
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (id) {
-          const fetchedBook = await getOneBook(id);
-          setBook(fetchedBook);
+          const oneBook = await getOneBook(id);
+          setBook(oneBook);
           setEditedBook({
-            title: fetchedBook.title,
-            subtitle: fetchedBook.subtitle,
+            title: oneBook.title,
+            subtitle: oneBook.subtitle,
           });
         } else {
           console.error("ID is undefined");
@@ -38,24 +44,22 @@ const BookEditDetails = () => {
     }));
   };
 
-  const handleEditClick = () => {
-    setIsEditing(true);
+  const moveToDetailsPage = () => {
+    navigate(`/books/${id}`);
   };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (id) {
       try {
-        // Aktualisierte Daten unter Verwendung aller vorhandenen Buchdetails
-        const updatedDataWithISBN = {
+        const updatedData = {
           ...book,
           ...editedBook,
-          isbn: id,
         };
 
-        const updatedBook = await updateBook(id, updatedDataWithISBN);
+        const updatedBook = await updateBook(id, updatedData);
         setBook(updatedBook);
-        setIsEditing(false); // Wechsel zurück in den Anzeigemodus
+        moveToDetailsPage();
       } catch (error) {
         console.error("Fehler beim Aktualisieren der Buchdetails:", error);
       }
@@ -63,7 +67,7 @@ const BookEditDetails = () => {
   };
 
   return (
-    <div>
+    <div className="editingPage">
       {isEditing ? (
         <form onSubmit={handleFormSubmit}>
           <div>
@@ -84,15 +88,35 @@ const BookEditDetails = () => {
               onChange={handleInputChange}
             />
           </div>
-          {/* Add other form fields as needed */}
-          <button type="submit">Save Changes</button>
+          <Button
+            style={{
+              maxWidth: "90px",
+              color: colorBlue,
+              borderColor: colorBlue,
+              borderRadius: "15px",
+            }}
+            variant="outlined"
+            type="submit"
+          >
+            Save
+          </Button>
+          <Button
+            style={{
+              maxWidth: "90px",
+              color: colorBlue,
+              borderColor: colorBlue,
+              borderRadius: "15px",
+            }}
+            variant="outlined"
+            onClick={moveToDetailsPage}
+          >
+            Back
+          </Button>
         </form>
       ) : (
         <div>
           <h2>{book?.title}</h2>
           <p>{book?.subtitle}</p>
-          {/* Display other book details in view mode */}
-          <button onClick={handleEditClick}>Edit</button>
         </div>
       )}
     </div>
