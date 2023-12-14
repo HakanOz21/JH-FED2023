@@ -69,31 +69,25 @@ async function deleteBook(isbn: string): Promise<void> {
     console.error('Error:', error);
   }
 }
-
-async function createBook(isbn: string, title: string, id: string): Promise<void> {
+*/
+async function createBook(bookData: Books): Promise<void> {
   try {
-    const requestData: Books = {
-      isbn,
-      title,
-      id,
-    };
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(requestData),
+      body: JSON.stringify(bookData),
     });
     if (!response.ok) {
       const returnText = await response.text();
       throw new Error(returnText);
     }
     const createdBook = await response.json();
-    console.log('Created Book:', createdBook);
+    console.log("Created Book:", createdBook);
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
+}
 
-}*/
-
-export { getAllBooks, getOneBook, updateBook };
+export { getAllBooks, getOneBook, updateBook, createBook };

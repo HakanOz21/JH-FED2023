@@ -8,7 +8,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { indigo } from "@mui/material/colors";
+import { indigo, red } from "@mui/material/colors";
 
 const BookDetails = () => {
   const [book, setBook] = useState<Books | null>(null);
@@ -16,6 +16,7 @@ const BookDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const colorBlue = indigo[700];
+  const colorRed = red[700];
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -86,6 +87,18 @@ const BookDetails = () => {
             onClick={handleEditClick}
           >
             Edit
+          </Button>
+          <Button
+            style={{
+              maxWidth: "90px",
+              margin: "0 10px",
+              color: colorRed,
+              borderColor: colorRed,
+              borderRadius: "15px",
+            }}
+            variant="outlined"
+          >
+            Delete
           </Button>
           <Button
             style={{

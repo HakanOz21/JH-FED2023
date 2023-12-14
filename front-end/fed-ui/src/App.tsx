@@ -5,6 +5,7 @@ import BookDetails from "./components/BookDetails";
 import BookEditDetails from "./components/BookEditDetails";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import AddBook from "./components/AddBook";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<BookList />} />
         <Route path="/books/:id" element={<BookDetails />} />
         <Route path="/books/:id/edit" element={<BookEditDetails />} />
+        <Route path="/books/add" element={<AddBook />} />
       </Routes>
       <Footer />
     </div>
