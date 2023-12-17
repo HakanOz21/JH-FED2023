@@ -1,6 +1,6 @@
 import { Books } from "./BooksInterface";
 
-export const API_URL: string = "http://localhost:4730/books?_limit=11";
+export const API_URL: string = "http://localhost:4730/books";
 export const BOOK_DETAILS_API_URL: string = "http://localhost:4730/books";
 
 async function getAllBooks(): Promise<Books[]> {
@@ -53,23 +53,24 @@ async function updateBook(id: string, updatedData: Partial<Books>) {
   }
 }
 
-/*
 async function deleteBook(isbn: string): Promise<void> {
   try {
-    const response = await fetch(`${API_URL}/${isbn}`, {
+    const response = await fetch(`${BOOK_DETAILS_API_URL}/${isbn}`, {
       method: "DELETE",
     });
+
     if (!response.ok) {
       const returnText = await response.text();
       throw new Error(returnText);
     }
-    const deletedBook = await response.json();
-    console.log('Deleted Book:', deletedBook);
+
+    console.log(`Book with ISBN ${isbn} deleted successfully.`);
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
+    throw error;
   }
 }
-*/
+
 async function createBook(bookData: Books): Promise<void> {
   try {
     const response = await fetch(API_URL, {
@@ -90,4 +91,4 @@ async function createBook(bookData: Books): Promise<void> {
   }
 }
 
-export { getAllBooks, getOneBook, updateBook, createBook };
+export { getAllBooks, getOneBook, updateBook, createBook, deleteBook };

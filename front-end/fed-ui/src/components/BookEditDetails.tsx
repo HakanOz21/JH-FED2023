@@ -5,6 +5,8 @@ import { Books } from "../models/BooksInterface";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { indigo } from "@mui/material/colors";
+import { StyledInput, Label } from "./formStyle";
+import { Textarea } from "@nextui-org/react";
 
 const BookEditDetails = () => {
   const { id } = useParams();
@@ -24,6 +26,13 @@ const BookEditDetails = () => {
           setEditedBook({
             title: oneBook.title,
             subtitle: oneBook.subtitle,
+            isbn: oneBook.isbn,
+            abstract: oneBook.abstract,
+            author: oneBook.author,
+            price: oneBook.price,
+            cover: oneBook.cover,
+            publisher: oneBook.publisher,
+            numPages: oneBook.numPages,
           });
         } else {
           console.error("ID is undefined");
@@ -36,7 +45,9 @@ const BookEditDetails = () => {
     fetchData();
   }, [id]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setEditedBook((prevBook) => ({
       ...prevBook,
@@ -68,56 +79,118 @@ const BookEditDetails = () => {
 
   return (
     <div className="editingPage">
-      {isEditing ? (
+      {isEditing && (
         <form onSubmit={handleFormSubmit}>
-          <div>
-            <label>Title:</label>
-            <input
+          <div style={{ marginBottom: "5px" }}>
+            <Label>Title:</Label>
+            <StyledInput
               type="text"
               name="title"
               value={editedBook.title || ""}
               onChange={handleInputChange}
             />
           </div>
-          <div>
-            <label>Subtitle:</label>
-            <input
+          <div style={{ marginBottom: "5px" }}>
+            <Label>Subtitle:</Label>
+            <StyledInput
               type="text"
               name="subtitle"
               value={editedBook.subtitle || ""}
               onChange={handleInputChange}
             />
           </div>
-          <Button
-            style={{
-              maxWidth: "90px",
-              color: colorBlue,
-              borderColor: colorBlue,
-              borderRadius: "15px",
-            }}
-            variant="outlined"
-            type="submit"
-          >
-            Save
-          </Button>
-          <Button
-            style={{
-              maxWidth: "90px",
-              color: colorBlue,
-              borderColor: colorBlue,
-              borderRadius: "15px",
-            }}
-            variant="outlined"
-            onClick={moveToDetailsPage}
-          >
-            Back
-          </Button>
+          <div style={{ marginBottom: "5px" }}>
+            <Label>ISBN:*</Label>
+            <StyledInput
+              type="text"
+              name="isbn"
+              value={editedBook.isbn || ""}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div style={{ marginBottom: "5px" }}>
+            <Label>Abstract:</Label>
+            <StyledInput
+              type="text"
+              name="abstract"
+              value={editedBook.abstract || ""}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div style={{ marginBottom: "5px" }}>
+            <Label>Author:</Label>
+            <StyledInput
+              type="text"
+              name="author"
+              value={editedBook.author || ""}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div style={{ marginBottom: "5px" }}>
+            <Label>Publisher:</Label>
+            <StyledInput
+              type="text"
+              name="publisher"
+              value={editedBook.publisher || ""}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div style={{ marginBottom: "5px" }}>
+            <Label>Price:</Label>
+            <StyledInput
+              type="text"
+              name="price"
+              value={editedBook.price || ""}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div style={{ marginBottom: "5px" }}>
+            <Label>Number of Pages:</Label>
+            <StyledInput
+              type="number"
+              name="numPages"
+              value={editedBook.numPages}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div style={{ marginBottom: "15px" }}>
+            <Label>Cover URL:</Label>
+            <StyledInput
+              type="text"
+              name="cover"
+              value={editedBook.cover || ""}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <Button
+              style={{
+                maxWidth: "90px",
+                color: colorBlue,
+                borderColor: colorBlue,
+                borderRadius: "15px",
+              }}
+              variant="outlined"
+              type="submit"
+            >
+              Save
+            </Button>
+            <Button
+              style={{
+                maxWidth: "90px",
+                marginLeft: "140px",
+                color: colorBlue,
+                borderColor: colorBlue,
+                borderRadius: "15px",
+              }}
+              variant="outlined"
+              onClick={moveToDetailsPage}
+            >
+              Back
+            </Button>
+          </div>
         </form>
-      ) : (
-        <div>
-          <h2>{book?.title}</h2>
-          <p>{book?.subtitle}</p>
-        </div>
       )}
     </div>
   );

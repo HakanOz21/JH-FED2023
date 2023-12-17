@@ -44,28 +44,32 @@ const BookList = () => {
             }}
           >
             <CardContent>
-              <div>
-                <h2>
-                  {book.title.length > maxLength
-                    ? book.title.substring(0, maxLength - 3) + "..."
-                    : book.title}
-                </h2>
-              </div>
-              <div>
-                <Typography>{book.author}</Typography>
-              </div>
-              {book.cover ? (
-                <CardMedia
-                  component="img"
-                  alt="Bild vorhanden"
-                  image={book.cover}
-                  onClick={() => navigate(`/books/${book.id}`)}
-                />
-              ) : (
+              <div
+                onClick={() => navigate(`/books/${book.id}`)}
+                style={{ cursor: "pointer" }}
+              >
                 <div>
-                  <p>Kein Bild vorhanden</p>
+                  <h2>
+                    {book.title.length > maxLength
+                      ? book.title.substring(0, maxLength - 3) + "..."
+                      : book.title}
+                  </h2>
                 </div>
-              )}
+                <div>
+                  <Typography>{book.author}</Typography>
+                </div>
+                {book.cover ? (
+                  <CardMedia
+                    component="img"
+                    alt="Bild vorhanden"
+                    image={book.cover}
+                  />
+                ) : (
+                  <div>
+                    <p>Kein Bild vorhanden</p>
+                  </div>
+                )}
+              </div>
               <div className="publisher-price-container">
                 <div>
                   <Typography style={{ color: colorBlue }}>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../App.css";
 import { Books } from "../models/BooksInterface";
-import { getOneBook } from "../models/API";
+import { getOneBook, deleteBook } from "../models/API";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
@@ -25,6 +25,20 @@ const BookDetails = () => {
 
   const moveToAllBooks = () => {
     navigate(`/`);
+  };
+
+  const removeBook = async () => {
+    try {
+      if (id) {
+        await deleteBook(id);
+        setBook(null);
+        moveToAllBooks();
+      } else {
+        console.error("ID is undefined");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -65,17 +79,30 @@ const BookDetails = () => {
                 <p>Kein Bild vorhanden</p>
               </div>
             )}
+            <div className="publisher-price-container">
+              <Typography style={{ color: colorBlue }}>
+                {book?.price}
+              </Typography>
+              <Typography>{book?.publisher}</Typography>
+            </div>
           </CardContent>
         </Card>
       </div>
       <div className="details">
         <Typography variant="h3">{book?.title}</Typography>
         <Typography variant="h5">{book?.subtitle}</Typography>
-        <Typography variant="h6">Description</Typography>
+        <Typography variant="h6" style={{ textDecoration: "underline" }}>
+          Description
+        </Typography>
         <Typography>{book?.abstract}</Typography>
-        <Typography>{book?.author}</Typography>
+        <div className="author-price-container">
+          <Typography variant="body1" fontWeight="bold">
+            {book?.author}
+          </Typography>
+          <Typography>p.{book?.numPages}</Typography>
+          <Typography>ISBN: {book?.isbn}</Typography>
+        </div>
         <div>
-          {" "}
           <Button
             style={{
               maxWidth: "90px",
@@ -91,12 +118,13 @@ const BookDetails = () => {
           <Button
             style={{
               maxWidth: "90px",
-              margin: "0 10px",
+              margin: "0 40px",
               color: colorRed,
               borderColor: colorRed,
               borderRadius: "15px",
             }}
             variant="outlined"
+            onClick={removeBook}
           >
             Delete
           </Button>

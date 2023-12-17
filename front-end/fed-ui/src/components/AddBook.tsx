@@ -14,6 +14,10 @@ const AddBook = () => {
     navigate(`/`);
   };
 
+  const moveToDetailsPage = (bookId: string) => {
+    navigate(`/books/${bookId}`);
+  };
+
   const [formData, setFormData] = useState<Books>({
     id: "",
     title: "",
@@ -56,6 +60,7 @@ const AddBook = () => {
         numPages: 0,
         cover: "",
       });
+      moveToDetailsPage(formData.id);
     } catch (error) {
       console.error("Fehler beim Hinzufügen des Buchs:", error);
     }
@@ -63,7 +68,7 @@ const AddBook = () => {
 
   return (
     <form className="addBookPage" onSubmit={handleFormSubmit}>
-      <div>
+      <div style={{ marginBottom: "5px" }}>
         <Label>Title:*</Label>
         <StyledInput
           type="text"
@@ -74,7 +79,7 @@ const AddBook = () => {
           required
         />
       </div>
-      <div>
+      <div style={{ marginBottom: "5px" }}>
         <Label>Subtitle:</Label>
         <StyledInput
           type="text"
@@ -84,7 +89,7 @@ const AddBook = () => {
           name="subtitle"
         />
       </div>
-      <div>
+      <div style={{ marginBottom: "5px" }}>
         <Label>ISBN:*</Label>
         <StyledInput
           type="text"
@@ -95,7 +100,7 @@ const AddBook = () => {
           required
         />
       </div>
-      <div>
+      <div style={{ marginBottom: "5px" }}>
         <Label>Abstract:</Label>
         <StyledInput
           placeholder="abstract"
@@ -106,7 +111,7 @@ const AddBook = () => {
           name="abstract"
         />
       </div>
-      <div>
+      <div style={{ marginBottom: "5px" }}>
         <Label>Author:</Label>
         <StyledInput
           type="text"
@@ -116,7 +121,7 @@ const AddBook = () => {
           name="author"
         />
       </div>
-      <div>
+      <div style={{ marginBottom: "5px" }}>
         <Label>Publisher:</Label>
         <StyledInput
           type="text"
@@ -126,7 +131,7 @@ const AddBook = () => {
           name="publisher"
         />
       </div>
-      <div>
+      <div style={{ marginBottom: "5px" }}>
         <Label>Price:</Label>
         <StyledInput
           type="text"
@@ -136,7 +141,7 @@ const AddBook = () => {
           name="price"
         />
       </div>
-      <div>
+      <div style={{ marginBottom: "5px" }}>
         <Label>Number of Pages:</Label>
         <StyledInput
           type="number"
@@ -146,7 +151,7 @@ const AddBook = () => {
           name="numPages"
         />
       </div>
-      <div>
+      <div style={{ marginBottom: "15px" }}>
         <Label>Cover URL:</Label>
         <StyledInput
           type="text"
@@ -172,7 +177,7 @@ const AddBook = () => {
         <Button
           style={{
             maxWidth: "90px",
-            margin: "0 10px",
+            marginLeft: "120px",
             color: colorBlue,
             borderColor: colorBlue,
             borderRadius: "15px",
