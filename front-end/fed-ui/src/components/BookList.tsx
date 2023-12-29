@@ -35,7 +35,7 @@ const BookList = () => {
     const intervalId = setInterval(fetchData, 60000);
 
     return () => clearInterval(intervalId);
-  }, [refresh]);
+  }, []);
 
   return (
     <div>
