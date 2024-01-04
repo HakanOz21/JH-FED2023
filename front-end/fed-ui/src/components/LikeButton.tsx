@@ -8,6 +8,7 @@ const LikeButton = () => {
   const [like, setLike] = useState(0);
   const colorBlue = indigo[700];
 
+  // Like button click handler
   const handleLike = () => {
     setLike(like + 1);
   };
