@@ -20,6 +20,7 @@ const BookList = () => {
   const navigate = useNavigate();
   const { books: fetchBooks, state, refresh } = useBooks();
 
+  // Fetch books and setup interval for auto-refresh
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,13 +33,15 @@ const BookList = () => {
 
     fetchData();
 
-    const intervalId = setInterval(fetchData, 60000);
+    const intervalId = setInterval(fetchData, 60000); // Refresh every 60 seconds
 
-    return () => clearInterval(intervalId);
+    return () => clearInterval(intervalId); // Cleanup function clears the interval when component unmounts
   }, []);
 
+  // JSX rendering
   return (
     <div>
+      {/* Loading state */}
       {state === "loading" && (
         <p
           style={{ textAlign: "center", fontSize: "1.2em", minHeight: "80vh" }}
@@ -46,6 +49,7 @@ const BookList = () => {
           Loading items...
         </p>
       )}
+      {/* Error state */}
       {state === "error" && (
         <p
           style={{ textAlign: "center", fontSize: "1.2em", minHeight: "80vh" }}
@@ -53,6 +57,7 @@ const BookList = () => {
           Error... Couldn't fetch books.
         </p>
       )}
+      {/* Success state */}
       {state === "success" && (
         <div className="book-list">
           {books.map((book) => (
@@ -72,6 +77,7 @@ const BookList = () => {
                     style={{ cursor: "pointer" }}
                   >
                     <div>
+                      {/* Display truncated title */}
                       <h2>
                         {book.title.length > maxLength
                           ? book.title.substring(0, maxLength - 3) + "..."
@@ -82,12 +88,14 @@ const BookList = () => {
                       <Typography>{book.author}</Typography>
                     </div>
                     {book.cover ? (
+                      // Display cover image if available
                       <CardMedia
                         component="img"
                         alt="Bild vorhanden"
                         image={book.cover}
                       />
                     ) : (
+                      // Display message if no cover image
                       <div>
                         <p>Kein Bild vorhanden</p>
                       </div>
@@ -95,11 +103,13 @@ const BookList = () => {
                   </div>
                   <div className="publisher-price-container">
                     <div>
+                        {/* Display book price */}
                       <Typography style={{ color: colorBlue }}>
                         {book.price}
                       </Typography>
                     </div>
                     <div>
+                      {/* Render LikeButton component */}
                       <LikeButton />
                     </div>
                   </div>
