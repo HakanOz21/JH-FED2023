@@ -18,15 +18,18 @@ const BookDetails = () => {
   const colorBlue = indigo[700];
   const colorRed = red[700];
 
+  // Function to handle click on Edit button
   const handleEditClick = () => {
     setIsEditing(true);
     navigate(`/books/${book?.id}/edit?editing=true`);
   };
 
+  // Function to navigate back to all books
   const moveToAllBooks = () => {
     navigate(`/`);
   };
 
+  // Function to remove a book
   const removeBook = async () => {
     try {
       if (id) {
@@ -41,6 +44,7 @@ const BookDetails = () => {
     }
   };
 
+  // Fetch book data on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -57,6 +61,7 @@ const BookDetails = () => {
     fetchData();
   }, [id]);
 
+  // JSX rendering
   return (
     <div className="book-details">
       <div className="card-container">
@@ -70,6 +75,7 @@ const BookDetails = () => {
           }}
         >
           <CardContent>
+            {/*Check if book has cover image*/}
             {book?.cover ? (
               <div>
                 <img src={book.cover} alt="Bild vorhanden" />
@@ -103,6 +109,7 @@ const BookDetails = () => {
           <Typography>ISBN: {book?.isbn}</Typography>
         </div>
         <div>
+          {/* Button to edit the book */}
           <Button
             style={{
               maxWidth: "90px",
@@ -115,6 +122,7 @@ const BookDetails = () => {
           >
             Edit
           </Button>
+          {/* Button to delete the book */}
           <Button
             style={{
               maxWidth: "90px",
@@ -128,6 +136,7 @@ const BookDetails = () => {
           >
             Delete
           </Button>
+          {/* Button to go back to all books */}
           <Button
             style={{
               maxWidth: "90px",
