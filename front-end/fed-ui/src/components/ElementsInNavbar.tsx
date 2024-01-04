@@ -6,8 +6,10 @@ import { indigo } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
 
 function ElementsInNavbar() {
+
   const colorBlue = indigo[700];
   const navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -17,8 +19,13 @@ function ElementsInNavbar() {
         width: "100%",
       }}
     >
+       {/* Logo and title */}
       <div style={{ display: "flex", alignItems: "center" }}>
+
+         {/* Icon */}
         <AutoStoriesIcon sx={{ mr: 1, color: "#3f51b5" }} />
+
+        {/* Typography for title */}
         <Typography
           variant="h5"
           noWrap
@@ -33,6 +40,7 @@ function ElementsInNavbar() {
         </Typography>
       </div>
       <div>
+        {/* Add Book Button */}
         <Button
           style={{
             maxWidth: "110px",
@@ -46,6 +54,8 @@ function ElementsInNavbar() {
         >
           Add Book
         </Button>
+
+        {/* Login Button */}
         <Button
           style={{
             maxWidth: "90px",
