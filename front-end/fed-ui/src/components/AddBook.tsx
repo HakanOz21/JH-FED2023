@@ -10,10 +10,12 @@ const AddBook = () => {
   const navigate = useNavigate();
   const colorBlue = indigo[700];
 
+  // Function to navigate to the main page
   const moveToAllBooks = () => {
     navigate(`/`);
   };
 
+  // Function to navigate to the details page of a book
   const moveToDetailsPage = (bookId: string) => {
     navigate(`/books/${bookId}`);
   };
@@ -31,6 +33,7 @@ const AddBook = () => {
     cover: "",
   });
 
+  // Function to handle input changes in the form
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -43,6 +46,7 @@ const AddBook = () => {
     }));
   };
 
+  // Function to handle form submission
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -66,6 +70,7 @@ const AddBook = () => {
     }
   };
 
+  // JSX rendering
   return (
     <form className="addBookPage" onSubmit={handleFormSubmit}>
       <div style={{ marginBottom: "5px" }}>
@@ -162,6 +167,7 @@ const AddBook = () => {
         />
       </div>
       <div>
+        {/* Button to add the book */}
         <Button
           style={{
             maxWidth: "110px",
@@ -174,6 +180,7 @@ const AddBook = () => {
         >
           Add Book
         </Button>
+        {/* Button to navigate back to the main page */}
         <Button
           style={{
             maxWidth: "90px",
