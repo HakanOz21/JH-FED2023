@@ -45,6 +45,7 @@ const BookEditDetails = () => {
     fetchData();
   }, [id]);
 
+  // Function to handle input changes in the form
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -55,10 +56,12 @@ const BookEditDetails = () => {
     }));
   };
 
+  // Function to navigate to the details page of the book
   const moveToDetailsPage = () => {
     navigate(`/books/${id}`);
   };
 
+  // Function to handle form submission
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (id) {
@@ -77,10 +80,12 @@ const BookEditDetails = () => {
     }
   };
 
+    // JSX rendering
   return (
     <div className="editingPage">
       {isEditing && (
         <form onSubmit={handleFormSubmit}>
+           {/* Input fields and their labels */}
           <div style={{ marginBottom: "5px" }}>
             <Label>Title:</Label>
             <StyledInput
@@ -164,6 +169,7 @@ const BookEditDetails = () => {
             />
           </div>
           <div>
+            {/* Button to save the changes */}
             <Button
               style={{
                 maxWidth: "90px",
@@ -176,6 +182,7 @@ const BookEditDetails = () => {
             >
               Save
             </Button>
+             {/* Button to navigate back to the details page */}
             <Button
               style={{
                 maxWidth: "90px",
