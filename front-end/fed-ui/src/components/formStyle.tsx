@@ -40,6 +40,7 @@ const StyledInput = styled(Input)(
 );
 
 const Label = styled(
+  // Check if the FormControlContext is filled
   ({
     children,
     className,
@@ -87,6 +88,7 @@ const HelperText = styled((props: {}) => {
   const [dirty, setDirty] = React.useState(false);
 
   React.useEffect(() => {
+    // Check if the FormControlContext is filled
     if (formControlContext?.filled) {
       setDirty(true);
     }
