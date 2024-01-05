@@ -9,6 +9,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { indigo, red } from "@mui/material/colors";
+import noimage from "../noimage.jpg"
 
 const BookDetails = () => {
   const [book, setBook] = useState<Books | null>(null);
@@ -82,7 +83,7 @@ const BookDetails = () => {
               </div>
             ) : (
               <div>
-                <p>Kein Bild vorhanden</p>
+                <img src={noimage} alt="Kein Bild vorhanden" />
               </div>
             )}
             <div className="publisher-price-container">
