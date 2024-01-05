@@ -7,7 +7,7 @@ type FetchState = "initial" | "loading" | "success" | "error";
 const useBooks = () => {
   const [books, setBooks] = useState<Books[]>([]);
   const [state, setState] = useState<FetchState>("initial");
-  const [error, setError] = useState<Error | undefined>(undefined);
+  const [error, setError] = useState<Error | null>();
 
   const fetchData = async () => {
     setState("loading");
