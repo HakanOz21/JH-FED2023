@@ -12,6 +12,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { CardMedia } from "@mui/material";
 import useBooks from "../models/Hooks.ts";
+import noimage from "../noimage.jpg"
 
 const BookList = () => {
   const [books, setBooks] = useState<Books[]>([]);
@@ -96,9 +97,11 @@ const BookList = () => {
                       />
                     ) : (
                       // Display message if no cover image
-                      <div>
-                        <p>Kein Bild vorhanden</p>
-                      </div>
+                      <CardMedia
+                      component="img"
+                      alt="Kein Bild vorhanden"
+                      image={noimage}
+                    />
                     )}
                   </div>
                   <div className="publisher-price-container">
