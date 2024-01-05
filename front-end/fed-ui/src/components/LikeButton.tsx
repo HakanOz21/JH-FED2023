@@ -24,6 +24,7 @@ const LikeButton = () => {
       variant="outlined"
       onClick={handleLike}
       startIcon={<ThumbUpIcon />}
+      className="like-button"
     >
       {like}
     </Button>

@@ -134,3 +134,7 @@ button {
   align-items: center;
   gap: 30px;
 }
+
+.like-button:hover .MuiSvgIcon-root {
+  transform: scale(1.1);
+}
