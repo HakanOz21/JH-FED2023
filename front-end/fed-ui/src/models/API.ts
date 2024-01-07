@@ -1,11 +1,10 @@
 import { Books } from "./BooksInterface";
 
-export const API_URL: string = "http://localhost:4730/books";
 export const BOOK_DETAILS_API_URL: string = "http://localhost:4730/books";
 
 async function getAllBooks(): Promise<Books[]> {
   try {
-    const response = await fetch(API_URL);
+    const response = await fetch(BOOK_DETAILS_API_URL);
     if (!response.ok) {
       const returnText = await response.text();
       throw new Error(returnText);
@@ -73,7 +72,7 @@ async function deleteBook(isbn: string): Promise<void> {
 
 async function createBook(bookData: Books): Promise<void> {
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch(BOOK_DETAILS_API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
