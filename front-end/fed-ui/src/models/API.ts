@@ -1,6 +1,30 @@
 import { Books } from "./BooksInterface";
 
 export const BOOK_DETAILS_API_URL: string = "http://localhost:4730/books";
+export const AUTH: string = "http://localhost:4730/";
+
+async function authenticateUser(email: string, password: string) {
+  try {
+    const response = await fetch(AUTH + "login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!response.ok) {
+      const returnText = await response.text();
+      throw new Error(returnText);
+    }
+
+    const responseData = await response.json();
+    return responseData.user;
+  } catch (error) {
+    console.error("Authentication Error:", error);
+    throw error;
+  }
+}
 
 async function getAllBooks(): Promise<Books[]> {
   try {
@@ -90,4 +114,11 @@ async function createBook(bookData: Books): Promise<void> {
   }
 }
 
-export { getAllBooks, getOneBook, updateBook, createBook, deleteBook };
+export {
+  getAllBooks,
+  getOneBook,
+  updateBook,
+  createBook,
+  deleteBook,
+  authenticateUser,
+};

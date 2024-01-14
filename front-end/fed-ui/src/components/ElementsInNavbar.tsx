@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import Button from "@mui/material/Button";
 import { indigo } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../models/LoginContext";
 
 function ElementsInNavbar() {
-
   const colorBlue = indigo[700];
   const navigate = useNavigate();
+  const userContext = useContext(UserContext);
+
+  const handleLogout = () => {
+    userContext.setUser(null);
+    navigate(`/`);
+  };
 
   return (
     <div
@@ -19,10 +25,9 @@ function ElementsInNavbar() {
         width: "100%",
       }}
     >
-       {/* Logo and title */}
+      {/* Logo and title */}
       <div style={{ display: "flex", alignItems: "center" }}>
-
-         {/* Icon */}
+        {/* Icon */}
         <AutoStoriesIcon sx={{ mr: 1, color: "#3f51b5" }} />
 
         {/* Typography for title */}
@@ -56,17 +61,33 @@ function ElementsInNavbar() {
         </Button>
 
         {/* Login Button */}
-        <Button
-          style={{
-            maxWidth: "90px",
-            color: colorBlue,
-            borderColor: colorBlue,
-            borderRadius: "15px",
-          }}
-          variant="outlined"
-        >
-          Login
-        </Button>
+        {userContext.user ? (
+          <Button
+            style={{
+              maxWidth: "90px",
+              color: colorBlue,
+              borderColor: colorBlue,
+              borderRadius: "15px",
+            }}
+            variant="outlined"
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        ) : (
+          <Button
+            style={{
+              maxWidth: "90px",
+              color: colorBlue,
+              borderColor: colorBlue,
+              borderRadius: "15px",
+            }}
+            variant="outlined"
+            onClick={() => navigate(`/login`)}
+          >
+            Login
+          </Button>
+        )}
       </div>
     </div>
   );
