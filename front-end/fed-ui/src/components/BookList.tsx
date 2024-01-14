@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import { indigo } from "@mui/material/colors";
 import "../App.css";
@@ -12,7 +12,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { CardMedia } from "@mui/material";
 import useBooks from "../models/Hooks.ts";
-import noimage from "../noimage.jpg"
+import noimage from "../noimage.jpg";
+import { UserContext } from "../models/LoginContext";
 
 const BookList = () => {
   const [books, setBooks] = useState<Books[]>([]);
@@ -20,6 +21,11 @@ const BookList = () => {
   const colorBlue = indigo[700];
   const navigate = useNavigate();
   const { books: fetchBooks, state, refresh } = useBooks();
+
+  const userContext = useContext(UserContext);
+  useEffect(() => {
+    console.log("userContext", userContext);
+  }, [userContext]);
 
   // Fetch books and setup interval for auto-refresh
   useEffect(() => {
@@ -34,7 +40,7 @@ const BookList = () => {
 
     fetchData();
 
-    const intervalId = setInterval(fetchData, 3000); // Refresh every 60 seconds
+    const intervalId = setInterval(fetchData, 30000); // Refresh every 60 seconds
 
     return () => clearInterval(intervalId); // Cleanup function clears the interval when component unmounts
   }, []);
@@ -98,15 +104,15 @@ const BookList = () => {
                     ) : (
                       // Display message if no cover image
                       <CardMedia
-                      component="img"
-                      alt="Kein Bild vorhanden"
-                      image={noimage}
-                    />
+                        component="img"
+                        alt="Kein Bild vorhanden"
+                        image={noimage}
+                      />
                     )}
                   </div>
                   <div className="publisher-price-container">
                     <div>
-                        {/* Display book price */}
+                      {/* Display book price */}
                       <Typography style={{ color: colorBlue }}>
                         {book.price}
                       </Typography>
