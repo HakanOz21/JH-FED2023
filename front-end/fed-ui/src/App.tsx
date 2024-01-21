@@ -9,6 +9,7 @@ import AddBook from "./components/AddBook";
 import Login from "./components/Login";
 import AboutPage from "./components/AboutPage";
 import { UserContextProvider } from "./models/LoginContext";
+import PrivateRoute from "./models/PrivateRoute";
 
 function App() {
   return (
@@ -19,8 +20,13 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<BookList />} />
           <Route path="/books/:id" element={<BookDetails />} />
-          <Route path="/books/:id/edit" element={<BookEditDetails />} />
-          <Route path="/books/add" element={<AddBook />} />
+
+          {/* These are just for logged users available */}
+          <Route element={<PrivateRoute />}>
+            <Route path="/books/:id/edit" element={<BookEditDetails />} />
+            <Route path="/books/add" element={<AddBook />} />
+          </Route>
+
           <Route path="/about" element={<AboutPage />} />
         </Routes>
         <Footer />

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "../App.css";
 import { Books } from "../models/BooksInterface";
 import { getOneBook, deleteBook } from "../models/API";
@@ -9,13 +9,15 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { indigo, red } from "@mui/material/colors";
-import noimage from "../noimage.jpg"
+import { UserContext } from "../models/LoginContext";
+import noimage from "../noimage.jpg";
 
 const BookDetails = () => {
   const [book, setBook] = useState<Books | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const userContext = useContext(UserContext);
   const colorBlue = indigo[700];
   const colorRed = red[700];
 
@@ -111,32 +113,36 @@ const BookDetails = () => {
         </div>
         <div>
           {/* Button to edit the book */}
-          <Button
-            style={{
-              maxWidth: "90px",
-              color: colorBlue,
-              borderColor: colorBlue,
-              borderRadius: "15px",
-            }}
-            variant="outlined"
-            onClick={handleEditClick}
-          >
-            Edit
-          </Button>
+          {userContext.user && (
+            <Button
+              style={{
+                maxWidth: "90px",
+                color: colorBlue,
+                borderColor: colorBlue,
+                borderRadius: "15px",
+              }}
+              variant="outlined"
+              onClick={handleEditClick}
+            >
+              Edit
+            </Button>
+          )}
           {/* Button to delete the book */}
-          <Button
-            style={{
-              maxWidth: "90px",
-              margin: "0 40px",
-              color: colorRed,
-              borderColor: colorRed,
-              borderRadius: "15px",
-            }}
-            variant="outlined"
-            onClick={removeBook}
-          >
-            Delete
-          </Button>
+          {userContext.user && (
+            <Button
+              style={{
+                maxWidth: "90px",
+                margin: "0 40px",
+                color: colorRed,
+                borderColor: colorRed,
+                borderRadius: "15px",
+              }}
+              variant="outlined"
+              onClick={removeBook}
+            >
+              Delete
+            </Button>
+          )}
           {/* Button to go back to all books */}
           <Button
             style={{

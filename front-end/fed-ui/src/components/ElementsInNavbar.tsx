@@ -46,19 +46,21 @@ function ElementsInNavbar() {
       </div>
       <div>
         {/* Add Book Button */}
-        <Button
-          style={{
-            maxWidth: "110px",
-            margin: "0 10px",
-            color: colorBlue,
-            borderColor: colorBlue,
-            borderRadius: "15px",
-          }}
-          variant="outlined"
-          onClick={() => navigate(`/books/add`)}
-        >
-          Add Book
-        </Button>
+        {userContext.user && (
+          <Button
+            style={{
+              maxWidth: "110px",
+              margin: "0 10px",
+              color: colorBlue,
+              borderColor: colorBlue,
+              borderRadius: "15px",
+            }}
+            variant="outlined"
+            onClick={() => navigate(`/books/add`)}
+          >
+            Add Book
+          </Button>
+        )}
 
         {/* Login Button */}
         {userContext.user ? (
