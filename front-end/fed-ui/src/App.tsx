@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AddBook from "./components/AddBook";
 import Login from "./components/Login";
+import AboutPage from "./components/AboutPage";
 import { UserContextProvider } from "./models/LoginContext";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/books/:id" element={<BookDetails />} />
           <Route path="/books/:id/edit" element={<BookEditDetails />} />
           <Route path="/books/add" element={<AddBook />} />
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
         <Footer />
       </UserContextProvider>
