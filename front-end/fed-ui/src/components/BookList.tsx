@@ -39,10 +39,6 @@ const BookList = () => {
     };
 
     fetchData();
-
-    const intervalId = setInterval(fetchData, 30000); // Refresh every 60 seconds
-
-    return () => clearInterval(intervalId); // Cleanup function clears the interval when component unmounts
   }, []);
 
   // JSX rendering

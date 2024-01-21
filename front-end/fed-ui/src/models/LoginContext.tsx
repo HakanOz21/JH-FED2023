@@ -40,31 +40,3 @@ export const UserContextProvider: React.FC<UserContextProviderType> = ({
     </UserContext.Provider>
   );
 };
-
-/* import { createContext, useState } from "react";
-
-export type UserContextType = {
-  user: any;
-  setUser: any;
-};
-
-type AuthUser = {
-  email: string;
-  name: string;
-};
-
-type UserContextProviderType = {
-  children: React.ReactNode;
-};
-
-export const UserContext = createContext({} as UserContextType);
-
-export const UserContextProvider = ({ children }: UserContextProviderType) => {
-  const [user, setUser] = useState<AuthUser | null>(null);
-  return (
-    <UserContext.Provider value={{ user, setUser }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
- */
